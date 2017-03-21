@@ -1,8 +1,25 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		
+		<!-- Meta/ Content -->
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<!-- JS -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script src= "https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+		<!-- Stylesheets / CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="assets/css/game.css">
 	</head>
-	<body>
-		<p>Hello, click play to start</p>
+	<body onload="init()">
+		<div id="content">
+			<p id="play_text" >Hello, click <button id="play" class="btn btn-danger">PLAY</button> to start</p>
+			<canvas id="stage-canvas" width="500" height="400"> Le browser does not support canvas, please upgrade you cheep fuck</canvas>
+		</div>
+		
+		<!-- JS make sure everything is loaded-->
+		<script src="assets/objects/balloon.js"></script>
+		
+		<script src="libs/game.js"></script> 
 	</body>
+	
 </html>
