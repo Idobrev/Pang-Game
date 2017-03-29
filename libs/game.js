@@ -1,7 +1,7 @@
 var stage;
 var fps = 60;
 var balloons =[];
-var gravity = 3;
+var gravity = 0.5;
 var debug = false;
 var balloonNum = 1;
 
@@ -20,14 +20,14 @@ function init () {
 		// we draw all balloons, we need to draw everything first then move if needed;
 		for( i = 0; i < balloonNum; i++ ) {
 			//var weight = rand(1, 10);
-			var weight = 10;
+			var weight = 20;
 			var rad = weight * 5;
 			balloon = new Balloon(rad, gravity, weight);
 			var posX = rand(0 + rad, stageWidth - rad);
 			//var posY = rand(-stageHeight, stageHeight);
-			var posY = rand(0, stageHeight - rad);
-			//var posX = 0;
-			//var posY = 0;
+			//var posY = rand(0, stageHeight - rad);
+			//var posX = 50;
+			var posY = -0;
 			balloon.draw(posX, posY, stage);
 			balloons.push(balloon);
 		}
