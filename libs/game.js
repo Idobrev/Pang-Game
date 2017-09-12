@@ -1,69 +1,75 @@
-var stage;
-var fps = 60;
-var balloons =[];
-var gravity = 0.5;
-var debug = false;
-var balloonNum = 1;
+var objectQ1 = [];//object quadrant 1 
+var objectQ2 = [];//object quadrant 2 
+var objectQ3 = [];//object quadrant 3 
+var objectQ4 = [];//object quadrant 4
+var global_currentLevelNumber = 1;
+var global_previousLevelNumber = undefined;
+var global_currentLevel = undefined;
+var global_stage;
+var currentTime = Date.now();
+var frametime = currentTime + frametimeDiff;
 
 function init () {
 	try {
-		stage = new createjs.Stage('stage-canvas');
+		//probably reset stage and tick
+		global_stage = new createjs.Stage('stage-canvas');
 		createjs.Ticker.addEventListener("tick", frameTick);
-		createjs.Ticker.framerate = fps;
-		var stageWidth = stage.canvas.width;
-		var stageHeight = stage.canvas.height;
+		createjs.Ticker.framerate = global_fps;
+		var stageWidth = global_stage.canvas.width;
+		var stageHeight = global_stage.canvas.height;
 		console.log("Stage is set to: ");
 		console.log("width (x): ", stageWidth);
 		console.log("height (y): ", stageHeight);
 		
-		
-		// we draw all balloons, we need to draw everything first then move if needed;
-		for( i = 0; i < balloonNum; i++ ) {
-			//var weight = rand(1, 10);
-			var weight = 20;
-			var rad = weight * 5;
-			balloon = new Balloon(rad, gravity, weight);
-			var posX = rand(0 + rad, stageWidth - rad);
-			//var posY = rand(-stageHeight, stageHeight);
-			//var posY = rand(0, stageHeight - rad);
-			//var posX = 50;
-			var posY = -0;
-			balloon.draw(posX, posY, stage);
-			balloons.push(balloon);
-		}
-		
 	}catch (e) {
 		console.log(e.name,": ", e.message);
-		createjs.Ticker.removeAllEventListeners('tick'); 
 		if (debug)
 			console.log(e.stack);
+		createjs.Ticker.removeAllEventListeners('tick');
+	}
+}
+
+function getLevel(number) {
+	if ( global_currentLevelNumber != global_previousLevelNumber || global_previousLevelNumber == undefined) {
+		switch(number) {
+		case 1:
+			global_currentLevel = new Level_one(global_stage);
+			break;
+		case 2:
+			console.log("Unfinished");
+			break;
+		default:
+			//default level
+		}
 	}
 }
 
 function frameTick(event) {
 	try {
-		for(i = 0; i < balloons.length; i++) {
-			balloons[i].move();
+		if ( useFrames || currentTime >= frametime ) {
+			frametime = currentTime + frametimeDiff; //calculate when the next frame is gunna happen
+			
+			//find out the current level and draw the frame for it
+			//get the current level
+			getLevel(global_currentLevelNumber);
+			global_currentLevel.createLevel();
+			global_currentLevel.frame();
+			
+			global_previousLevelNumber = global_currentLevelNumber;
+			global_stage.update();
 		}
-	
-	stage.update();
+		currentTime = Date.now();
+		
 	}catch (e){
-		// we are removing the tick. Stopping the game. Freezing it. Best way to handle exceptions.
-		createjs.Ticker.removeAllEventListeners('tick'); 
-		//show the exception
-		console.log(e.name,": ", e.message);
-		if (debug)
-			console.log(e.stack);
-	}
+			// we are removing the tick. Stopping the game. Freezing it. Best way to handle exceptions.
+			createjs.Ticker.removeAllEventListeners('tick'); 
+			//show the exception
+			console.log(e.name,": ", e.message);
+			if (debug)
+				console.log(e.stack);
+		}
 }
 
 function rand(min, max) {
   return Math.floor( Math.random() * (max - min) + min );
-}
-
-class PangException extends Error{
-		constructor(message) {
-			super(message); // always call super before 'this'. Otherwise an error will follow. We cannot do anything if there is a parent constructor
-			this.name = "PangException";
-		}
 }
