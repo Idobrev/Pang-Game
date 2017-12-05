@@ -13,17 +13,23 @@
 			<canvas id="stage-canvas" width="500" height="400"> Le browser does not support canvas, please upgrade you cheep fuck</canvas>
 		</div>
 		
-		<!-- JS -->
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-		<script src= "https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+		<!-- JS vendors -->
+		<script src="./vendor/jquery/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<!-- <script src= "https://code.createjs.com/createjs-2015.11.26.min.js"></script> -->
+		<script src= "./vendor/createjs/createjs.js"></script>
 		<!-- JS make sure everything is loaded-->
 		<script src="config/config.js"></script>
 		<script src="libs/pangException.js"></script>
-		<script src="libs/objects/object.js"></script>
+		<script src="libs/objects/gameObject.js"></script>
 		<script src="libs/objects/balloon.js"></script>
+		<!-- Load manifests -->
+		<script src="libs/manifests/manifest.js"></script>
+		<script src="libs/manifests/std_char.js"></script>
 		<!-- Levels loaded-->
 		<script src="libs/levels/level.js"></script>
-		<script src="libs/levels/level_one.js"></script>
+		<script src="libs/levels/level1.js"></script>
+		<script src="libs/characters/char_base.js"></script>
+		<script src="libs/characters/std_char.js"></script>
 		<script src="libs/game.js"></script> 
 	</body>
 	

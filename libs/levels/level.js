@@ -1,11 +1,10 @@
 class Level {
-	constructor(stage) {
+	constructor() {
 		if (new.target === Level) {
 		  throw new TypeError("Cannot construct Abstract instances directly");
 		}
-		this.stage = stage;
-		this.stageWidth = this.stage.canvas.width;
-		this.stageHeight = this.stage.canvas.height;
+		this.stageWidth = global_stage.canvas.width;
+		this.stageHeight = global_stage.canvas.height;
 		this.levelCreated = false;
 	}
 	

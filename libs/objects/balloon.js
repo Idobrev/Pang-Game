@@ -1,4 +1,4 @@
-class Balloon extends Object{
+class Balloon extends GameObject{
 	constructor(rad, gravity, weight) {
 		super();
 		this.rad = rad;
@@ -8,13 +8,13 @@ class Balloon extends Object{
 		this.shape = new createjs.Shape();
 		this.terminalV = weight * weight * this.gravity * 5;
 		this.rubberResistence = 0.87; // should very between 0 to 1
-		this.angularVelocity = 5; //this is pixels traveled per frame. 
+		this.angularVelocity = 1; //this is pixels traveled per frame. 
 		this.dirDown = 0;
 		this.dirUp = 1;
 		this.dirRight = 2;
 		this.dirLeft = 3;
 		this.direction = this.dirDown; 
-		this.kineticForce = 0; // this is the force that the object hits the ground or border. It will loose that much force from its velocity
+		this.kineticForce = 0; // this is the force that the object hits the ground or border. It will loose that much force from its velocity10
 		this.stop = false;
 	}
 		
@@ -51,7 +51,7 @@ class Balloon extends Object{
 	
 	moveDown() {
 		this.shape.y += this.velocity;
-		console.log(this.velocity);
+		//console.log(this.velocity);
 		if ( this.terminalV > this.velocity ) 
 			this.velocity += this.gravity; //increasing it per frame
 	}
@@ -63,22 +63,22 @@ class Balloon extends Object{
 	}
 	
 	bounce() {
-		//check if we hit anything
+		//check if we hit anything. Collision detection ? Must implement
 		if ( (this.shape.y + this.rad) >= this.stage.canvas.height && this.direction == this.dirDown ) {
 			//this.kineticForce = ( this.weight/2 ) * Math.pow(this.velocity, 2);
 			//console.log("Current speed", this.velocity );
 			//console.log("Kinetic energy" , this.kineticForce);
 			this.direction = this.dirUp; //go up;
-			console.log("Current V before: ", this.velocity);
+			//console.log("Current V before: ", this.velocity);
 			this.velocity = Math.floor(this.velocity * this.rubberResistence);
 			if ( this.velocity == 0 ) 
 			this.stop = true;
-			console.log("Current V: ", this.velocity);
+			//console.log("Current V: ", this.velocity);
 			//throw new PangException("Stop");
 			return;
 		}
 		if ( this.direction == this.dirUp && this.velocity <= this.gravity ) {
-			console.log("Reach equilibrium" , this.velocity);
+			//console.log("Reach equilibrium" , this.velocity);
 			this.direction = this.dirDown;
 			this.velocity = 0;
 			//throw new PangException("Stop");
